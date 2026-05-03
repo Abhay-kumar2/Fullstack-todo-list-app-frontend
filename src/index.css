@@ -1,74 +1,136 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+/* BODY */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+
+  background-color: #6e68ce; /* your original color */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container{
-  max-width: 600px;
-  margin: auto;
-  padding: 0 1rem;
+.header-box {
+  background: #000;
+  color: #5ea2bc;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
+.header-box h1 {
+  margin: 0;
+  font-size: 36px;
+}
 
+.content-box {
+  padding: 10px;
+}
+
+/* MAIN CONTAINER (big box) */
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+
+  background: white;
+  border-radius: 12px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* HEADING */
 h1 {
- margin-top: 1rem;
- text-align: center;
+  margin-top: 1rem;
+  text-align: center;
 }
 
-.top{
-  margin-top: 1rem;
+/* INPUT + BUTTON ROW */
+.top {
+  margin-top: 1.5rem;
   display: flex;
   gap: 1rem;
   justify-content: center;
 }
 
-input{
+/* INPUT */
+input {
   border: none;
   outline: none;
-  width: 400px;
-  padding: 0.5rem;
-  border-bottom: 1px solid #000;
+  width: 280px;
+  padding: 0.6rem;
+
+  border-radius: 6px;
+  border: 1px solid #000;
 }
 
-.add{
-  background-color: #389f2d;
-  color: #080411;
-  padding: 0.5rem 1.5rem;
+/* ADD BUTTON */
+.add {
+  background-color: #389f2d; /* your original */
+  color: #080411;           /* your original */
+  padding: 0.6rem 1.5rem;
+
+  border-radius: 6px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-.todo{
+.add:hover {
+  opacity: 0.9;
+}
+
+/* TODO BOX */
+.todo {
   position: relative;
   margin-top: 1rem;
-  background-color: #000;
-  color: #5ea2bc;
-  padding: 1.5rem 3rem;
-  border-radius: 5px;
+
+  background-color: #000;   /* your original */
+  color: #fafbfc;           /* your original */
+
+  padding: 1rem 3rem 1rem 1rem;
+
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  transition: 0.3s;
 }
 
-.icons{
+/* HOVER EFFECT */
+.todo:hover {
+  transform: translateY(-3px);
+}
+
+/* TEXT */
+.text {
+  font-size: 16px;
+}
+
+/* ICONS CONTAINER */
+.icons {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 20px;
+  right: 15px;
+
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
-.icon{
+/* ICON STYLE */
+.icon {
   cursor: pointer;
   font-size: 20px;
+  transition: 0.2s;
 }
 
-
-body {
-  background-color: #6e68ce; 
+/* ICON HOVER */
+.icon:hover {
+  transform: scale(1.2);
 }
