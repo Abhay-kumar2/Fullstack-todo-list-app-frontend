@@ -49,4 +49,13 @@ const deleteToDo = (_id, setToDo) => {
 
 }
 
-export { getAllToDo, addToDo, updateToDo, deleteToDo }
+const toggleComplete = (id, setToDo) => {
+    axios
+    .put(`${baseUrl}/toggle/${id}`)
+    .then(() => {
+        getAllToDo(setToDo);   // refresh list
+    })
+    .catch((err) => console.log(err))
+}
+
+export { getAllToDo, addToDo, updateToDo, deleteToDo, toggleComplete }

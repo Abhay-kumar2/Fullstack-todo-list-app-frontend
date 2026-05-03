@@ -66,6 +66,9 @@ function App() {
               <ToDo
                 key={item._id}
                 text={item.text}
+                 completed={item.completed}   
+                 _id={item._id}              
+                 setToDo={setToDo}
                 updateMode={() => updateMode(item._id, item.text)}
                 deleteToDo={() => deleteToDo(item._id, setToDo)}
               />
