@@ -1,61 +1,70 @@
-import axios from 'axios'
+const STORAGE_KEY = "demo_todos";
 
-const baseUrl = "https://fullstack-todo-list-app-backend-uu9t.onrender.com"
+const getStoredTodos = () => {
+  const savedTodos = localStorage.getItem(STORAGE_KEY);
+  return savedTodos ? JSON.parse(savedTodos) : [];
+};
+
+const saveTodos = (todos) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+};
 
 const getAllToDo = (setToDo) => {
-    axios
-    .get(baseUrl)
-    .then(({data}) => {
-        console.log('data ---> ', data);
-        setToDo(data)
-    })
-}
+  const todos = getStoredTodos();
+  setToDo(todos);
+};
 
 const addToDo = (text, setText, setToDo) => {
+  if (!text.trim()) return;
 
-    axios
-    .post(`${baseUrl}/save`, {text})
-    .then((data) => {
-        console.log(data);
-        setText("")
-        getAllToDo(setToDo)
-    })
-    .catch((err) => console.log(err))
+  const todos = getStoredTodos();
 
-}
+  const newTodo = {
+    _id: Date.now().toString(),
+    text,
+    completed: false,
+  };
 
-const updateToDo = (toDoId, text, setToDo, setText,setIsUpdating) => {
+  const updatedTodos = [...todos, newTodo];
 
-    axios
-    .post(`${baseUrl}/update`, {_id: toDoId, text})
-    .then((data) => {
-        setText("")
-        setIsUpdating(false)
-        getAllToDo(setToDo)
-    })
-    .catch((err) => console.log(err))
+  saveTodos(updatedTodos);
+  setToDo(updatedTodos);
+  setText("");
+};
 
-}
+const updateToDo = (toDoId, text, setToDo, setText, setIsUpdating) => {
+  if (!text.trim()) return;
+
+  const todos = getStoredTodos();
+
+  const updatedTodos = todos.map((todo) =>
+    todo._id === toDoId ? { ...todo, text } : todo
+  );
+
+  saveTodos(updatedTodos);
+  setToDo(updatedTodos);
+  setText("");
+  setIsUpdating(false);
+};
 
 const deleteToDo = (_id, setToDo) => {
+  const todos = getStoredTodos();
 
-    axios
-    .post(`${baseUrl}/delete`, {_id })
-    .then((data) => {
-        console.log(data)
-        getAllToDo(setToDo)
-    })
-    .catch((err) => console.log(err))
+  const updatedTodos = todos.filter((todo) => todo._id !== _id);
 
-}
+  saveTodos(updatedTodos);
+  setToDo(updatedTodos);
+};
 
 const toggleComplete = (id, setToDo) => {
-    axios
-    .put(`${baseUrl}/toggle/${id}`)
-    .then(() => {
-        getAllToDo(setToDo);   // refresh list
-    })
-    .catch((err) => console.log(err))
-}
+  const todos = getStoredTodos();
 
-export { getAllToDo, addToDo, updateToDo, deleteToDo, toggleComplete }
+  const updatedTodos = todos.map((todo) =>
+    todo._id === id ? { ...todo, completed: !todo.completed } : todo
+  );
+
+  saveTodos(updatedTodos);
+  setToDo(updatedTodos);
+};
+
+export { getAllToDo, addToDo, updateToDo, deleteToDo, toggleComplete };
